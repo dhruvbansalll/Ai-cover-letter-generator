@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-// Helper component for icons
+//Helper component for icons
 const Icon = ({ path, className = "w-6 h-6" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
         <path strokeLinecap="round" strokeLinejoin="round" d={path} />
     </svg>
 );
 
-// Main App Component
+//Main App Component
 export default function App() {
     // State management
     const [jobDescription, setJobDescription] = useState('');
@@ -17,21 +17,21 @@ export default function App() {
     const [error, setError] = useState('');
     const [copySuccess, setCopySuccess] = useState(false);
 
-    // --- Core Logic: AI Cover Letter Generation ---
+    //Core Logic
     const handleGenerate = async () => {
-        // 1. Validation
+        //Validation
         if (!jobDescription.trim() || !userResume.trim()) {
             setError('Please provide both a job description and your resume.');
             return;
         }
 
-        // 2. Reset state and start loading
+        //Reset state and start loading
         setIsLoading(true);
         setError('');
         setGeneratedCoverLetter('');
         setCopySuccess(false);
 
-        // 3. Construct the prompt for the AI model
+        //Construct the prompt for the AI model
         const prompt = `
             As an expert career coach and professional cover letter writer, your task is to generate a concise, compelling, and professional cover letter.
 
@@ -47,7 +47,7 @@ export default function App() {
         `;
 
         try {
-            // 4. Call the Gemini API
+            //Calling the Gemini API
             const chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
             const payload = { contents: chatHistory };
             const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -65,7 +65,7 @@ export default function App() {
 
             const result = await response.json();
 
-            // 5. Process the response and update state
+            //Process the response and update state
             if (result.candidates && result.candidates.length > 0 &&
                 result.candidates[0].content && result.candidates[0].content.parts &&
                 result.candidates[0].content.parts.length > 0) {
@@ -79,12 +79,11 @@ export default function App() {
             console.error("Error during generation:", err);
             setError(err.message || "An unknown error occurred. Please try again.");
         } finally {
-            // 6. Stop loading
             setIsLoading(false);
         }
     };
 
-    // --- Clipboard Logic ---
+    //Clipboard Logic
     const handleCopyToClipboard = () => {
         if (!generatedCoverLetter) return;
 
@@ -95,25 +94,24 @@ export default function App() {
         try {
             document.execCommand('copy');
             setCopySuccess(true);
-            setTimeout(() => setCopySuccess(false), 2000); // Reset after 2 seconds
+            setTimeout(() => setCopySuccess(false), 2000); // to reset after 2 seconds
         } catch (err) {
             console.error('Failed to copy text: ', err);
         }
         document.body.removeChild(textarea);
     };
     
-    // --- UI Rendering ---
+    //UI Rendering
     return (
         <div className="min-h-screen bg-slate-900 text-white font-sans p-4 sm:p-6 lg:p-8">
             <div className="max-w-7xl mx-auto">
-                {/* Header */}
                 <header className="text-center mb-8">
                     <h1 className="text-4xl sm:text-5xl font-bold text-sky-400">AI Cover Letter Generator</h1>
                     <p className="text-slate-400 mt-2 text-lg">Create a tailored cover letter in seconds.</p>
                 </header>
 
                 <main className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {/* Input Section */}
+                    {/*Input*/}
                     <div className="flex flex-col gap-6">
                         <div>
                             <label htmlFor="job-desc" className="block text-lg font-medium text-slate-300 mb-2">
@@ -162,7 +160,7 @@ export default function App() {
                         {error && <p className="text-red-400 text-center bg-red-900/50 p-3 rounded-lg">{error}</p>}
                     </div>
 
-                    {/* Output Section */}
+                    {/*Output*/}
                     <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6 relative">
                          <h2 className="text-2xl font-bold text-slate-200 mb-4">Generated Cover Letter</h2>
                          {generatedCoverLetter && (
