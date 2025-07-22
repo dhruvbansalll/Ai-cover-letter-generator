@@ -1,8 +1,10 @@
 # AI Cover Letter Generator 🚀
 
+Live : https://dhruvbansal-ai-cover-letter-generator.netlify.app/
+
 An intelligent web application that leverages the Google Gemini API to generate professional, tailored cover letters in seconds. This tool is designed to help job seekers streamline their application process by creating compelling content based on their resume and a specific job description.
 
-![AI Cover Letter Generator Screenshot]
+AI Cover Letter Generator Screenshot:
 <img width="1915" height="864" alt="image" src="https://github.com/user-attachments/assets/b1c3ffb5-5e4b-4329-a879-2d7d90ebfd04" />
 
 ---
@@ -26,11 +28,6 @@ This project is built with a modern, efficient tech stack:
 -   **Styling:** Tailwind CSS
 -   **AI:** Google Gemini API
 -   **Deployment:** Netlify
-
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Google Gemini API](https://img.shields.io/badge/Gemini_API-4285F4?style=for-the-badge&logo=google&logoColor=white)
 
 ---
 
